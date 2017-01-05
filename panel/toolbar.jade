@@ -1,0 +1,36 @@
+div.toolbar(style='padding: 4px;')
+  div.item
+    select#opts-device
+      option(value='0') Default
+
+  div.item
+    button#btn-rotate Rotate
+
+  div.item
+    select#opts-render-mode
+      option(value='0') WebGL
+      option(value='1') Canvas
+
+  div.item
+    button#btn-show-fps.icon
+      i.fa.fa-area-chart
+
+  div.item
+    span.item(style='font-size: small;') FPS:
+    input#input-set-fps(type='number')
+
+  div.item(style='margin-right: 0px;')
+    button#btn-refresh.icon(style='border-top-right-radius: 0px; border-bottom-right-radius: 0px;')
+      i.fa.fa-refresh(style='font-weight: bold;')
+  div.item(style='margin-right: 0px;')
+    button#btn-pause.icon(style='border-left-style: none; border-top-left-radius: 0px; border-bottom-left-radius: 0px;')
+      i.fa.fa-pause
+  div.item
+    button#btn-step.icon(style='display: none;')
+      i.fa.fa-step-forward(style='font-weight: bold;')
+
+  span.flex-1
+
+  div.item(style='margin-right: 0px;')
+    button#btn-devtools.icon
+      i.fa.fa-terminal(style='font-weight: bold;')

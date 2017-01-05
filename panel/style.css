@@ -1,0 +1,5 @@
+.toolbar button.icon {
+    min-height: 25px;
+    min-width: 27px;
+    padding: 0;
+}
