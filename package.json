@@ -4,6 +4,7 @@
   "description": "Preview your game in CocosCreator",
   "author": "Jare",
   "main": "main.js",
+  "scene-script": "main-window.js",
   "main-menu": {
     "i18n:MAIN_MENU.panel.title/Preview": {
       "message": "game-preview:open"

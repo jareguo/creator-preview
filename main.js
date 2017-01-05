@@ -23,6 +23,7 @@ function getPreviewSize () {
 module.exports = {
     load () {
         // execute when package loaded
+        // Editor.Scene.callSceneScript(PkgName, 'load');
     },
 
     unload () {
@@ -32,6 +33,7 @@ module.exports = {
             window.close();
         }
         this.unhookPreviewServer();
+        Editor.Scene.callSceneScript(PkgName, 'unload');
     },
 
     _getMainPage (req, res) {
@@ -105,30 +107,57 @@ module.exports = {
         return window;
     },
 
+    open () {
+        let window = Editor.Window.find(PkgName);
+        if (window) {
+            window.show();
+            window.focus();
+            return window;
+        }
+
+        this.hookPreviewServer();
+
+        // let window = this.openWindowRegisteredAsPanel();
+        window = this.openWindow();
+
+        // load game
+        let hostpath = `http://localhost:${Editor.PreviewServer.previewPort}/${Paths.pathname}`;
+        window.load(hostpath);
+
+        return window;
+    },
+
     // register your ipc messages here
     messages: {
         'open' () {
-            let window = Editor.Window.find(PkgName);
-            if (window) {
-                window.show();
-                window.focus();
-                return;
-            }
-
-            this.hookPreviewServer();
-
-            // let window = this.openWindowRegisteredAsPanel();
-            window = this.openWindow();
-
-            // load game
-            let hostpath = `http://localhost:${Editor.PreviewServer.previewPort}/${Paths.pathname}`;
-            window.load(hostpath);
+            this.open();
 
             Editor.Metrics.trackEvent({
                 category: 'Packages',
                 label: PkgName,
-                action: 'Panel Open'
+                action: 'Open By Menu'
             }, null);
+        },
+
+        'app:play-on-device' () {
+            let profileData = Editor.App._profile.data;
+            let platform = profileData['preview-platform'];
+            if (platform === PkgName) {
+                this.open();
+            }
+        },
+        'app:reload-on-device' () {
+            let profileData = Editor.App._profile.data;
+            let platform = profileData['preview-platform'];
+            if (platform === PkgName) {
+                let window = Editor.Window.find(PkgName);
+                if (window) {
+                    window.nativeWin.reload();
+                }
+                else {
+                    this.open();
+                }
+            }
         }
     },
 };
