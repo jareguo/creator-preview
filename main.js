@@ -10,6 +10,7 @@ const Paths = {
 };
 
 const UA = PkgName + '/' + require('./package.json').version;
+const WinBgColor = '#333333';
 
 let router = null;
 
@@ -94,11 +95,12 @@ module.exports = {
             webPreferences: {
                 webSecurity: false  // support custom protocols
             },
-            save: false
+            backgroundColor: WinBgColor,
+            save: false,
         };
         let window = new Editor.Window(PkgName, options);
         // init window
-        window.openDevTools();
+        // window.openDevTools();
         let webContents = window.nativeWin.webContents;
         let ua = webContents.getUserAgent();
         webContents.setUserAgent(ua + ' ' + UA);
