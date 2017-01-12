@@ -1,6 +1,6 @@
 {
   "name": "game-preview",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "Preview your game in CocosCreator",
   "author": "Jare",
   "main": "main.js",
@@ -10,7 +10,7 @@
       "message": "game-preview:open"
     }
   },
-  "hosts": {
-    "CocosCreator": ">=1.4.0-beta.9"
+  "_hosts": {
+    "CocosCreator": ">=1.4.0"
   }
 }
