@@ -156,9 +156,6 @@ module.exports = {
                 if (window) {
                     window.nativeWin.reload();
                 }
-                else {
-                    this.open();
-                }
             }
         }
     },
