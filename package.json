@@ -10,7 +10,7 @@
       "message": "game-preview:open"
     }
   },
-  "_hosts": {
-    "CocosCreator": ">=1.4.0"
+  "hosts": {
+    "CocosCreator": ">=1.4.0-beta.9"
   }
 }
